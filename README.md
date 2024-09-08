@@ -1,4 +1,4 @@
-# pictures_view
+# image_gallery_app
 
 This is project created for test work and add for my resume app.
 
