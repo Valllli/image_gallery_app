@@ -34,18 +34,19 @@ class _ImageGalleryPageState extends State<ImageGalleryPage> {
                 if (state is ImageLoading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is ImageLoaded) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1,
-                    ),
-                    itemCount: state.images.length,
-                    itemBuilder: (context, index) {
-                      final image = state.images[index];
-                      return ImageGridTile(image: image);
-                    },
-                  );
+                  return LayoutBuilder(builder: (context, constraints) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: getCrossAxisCount(constraints.maxWidth),
+                        childAspectRatio: 1,
+                      ),
+                      itemCount: state.images.length,
+                      itemBuilder: (context, index) {
+                        final image = state.images[index];
+                        return ImageGridTile(image: image);
+                      },
+                    );
+                  });
                 } else if (state is ImageError) {
                   return Center(child: Text(state.message));
                 }
@@ -56,5 +57,17 @@ class _ImageGalleryPageState extends State<ImageGalleryPage> {
         ],
       ),
     );
+  }
+
+  int getCrossAxisCount(double width) {
+    if (width > 1200) {
+      return 6; // Колонки для очень широких экранов
+    } else if (width > 900) {
+      return 4; // Колонки для средних экранов (планшеты)
+    } else if (width > 600) {
+      return 3; // Колонки для небольших экранов
+    } else {
+      return 2; // Колонки для телефонов
+    }
   }
 }

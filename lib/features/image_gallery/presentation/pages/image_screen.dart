@@ -12,7 +12,6 @@ class ImageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      // backgroundColor: Colors.black,
       body: GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: Center(
