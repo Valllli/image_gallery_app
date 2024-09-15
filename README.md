@@ -1,7 +1,5 @@
 # image_gallery_app
 
-This is project created for test work and add for my resume app.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
